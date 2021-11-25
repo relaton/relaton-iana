@@ -1,0 +1,137 @@
+= RelatonIana
+
+RelatonIana is a Ruby gem that implements the https://github.com/metanorma/metanorma-model-iso#iso-bibliographic-item[IsoBibliographicItem model].
+
+You can use it to retrieve metadata of W3C Standards from https://w3.org, and access such metadata through the `BibliographicItem` object.
+
+== Installation
+
+Add this line to your application's Gemfile:
+
+[source,ruby]
+----
+gem 'relaton-iana'
+----
+
+And then execute:
+
+    $ bundle install
+
+Or install it yourself as:
+
+    $ gem install relaton-iana
+
+== Usage
+
+=== Search for a standard using keywords
+
+[source,ruby]
+----
+require 'relaton_iana'
+=> true
+
+item = RelatonIana::IanaBibliography.get "IANA service-names-port-numbers" 
+[relaton-iana] ("IANA service-names-port-numbers") fetching...
+[relaton-iana] ("IANA service-names-port-numbers") found IANA service-names-port-numbers
+=> #<RelatonBib::BibliographicItem:0x00007f7c6cc024d0
+...
+----
+
+=== XML serialization
+
+[source,ruby]
+----
+item.to_xml
+=> "<bibitem id="IANAservice-names-port-numbers" type="standard">
+  <fetched>2021-11-24</fetched>
+  <title format="text/plain">Service Name and Transport Protocol Port Number Registry</title>
+  <uri type="src">http://www.iana.org/assignments/service-names-port-numbers</uri>
+  <docidentifier type="IANA">IANA service-names-port-numbers</docidentifier>
+  <docnumber>service-names-port-numbers</docnumber>
+  <date type="updated">
+    <on>2021-11-12</on>
+  </date>
+  <contributor>
+    <role type="publisher"/>
+    <organization>
+      <name>Internet Assigned Numbers Authority</name>
+      <abbreviation>IANA</abbreviation>
+    </organization>
+  </contributor>
+  <language>en</language>
+  <script>Latn</script>
+</bibitem>"
+----
+
+=== Typed links
+
+Each IANA document has `src` type link.
+
+[source,ruby]
+----
+item.link.first.type
+=> "src"
+
+item.link.first.content
+=> #<Addressable::URI:0x9ec URI:http://www.iana.org/assignments/service-names-port-numbers>
+----
+
+=== Create bibliographic item from XML
+[source,ruby]
+----
+RelatonBib::XMLParser.from_xml File.read('spec/fixtures/service-names-port-numbers.xml')
+=> #<RelatonBib::BibliographicItem:0x00007f7c6b837248
+...
+----
+
+=== Create bibliographic item from YAML
+[source,ruby]
+----
+hash = YAML.load_file 'spec/fixtures/service-names-port-numbers.yaml'
+=> {"id"=>"IANAservice-names-port-numbers",
+ "title"=>{"content"=>"Service Name and Transport Protocol Port Number Registry", "format"=>"text/plain"},
+...
+
+bib_hash = RelatonIana::HashConverter.hash_to_bib hash
+=> {:id=>"IANAservice-names-port-numbers",
+ :title=>{:content=>"Service Name and Transport Protocol Port Number Registry", :format=>"text/plain"},
+...
+
+RelatonBib::BibliographicItem.new **bib_hash
+=> #<RelatonBib::BibliographicItem:0x007f9381ec6a00
+...
+----
+
+=== Fetch data
+
+There is a IANA dataset https://github.com/ietf-ribose/iana-registries which can be converted into RelatonXML/BibXML/BibYAML formats.
+
+The method `RelatonIana::DataFetcher.fetch(output: "data", format: "yaml")` converts all the documents from the dataset and save them to the `./data` folder in YAML format.
+Arguments:
+
+- `output` - folder to save documents (default './data').
+- `format` - format in which the documents are saved. Possimle formats are: `yaml`, `xml`, `bibxml` (default `yaml`).
+
+[source,ruby]
+----
+RelatonIana::DataFetcher.fetch
+Started at: 2021-11-19 13:32:05 +0100
+Stopped at: 2021-11-19 13:34:40 +0100
+Done in: 155 sec.
+=> nil
+----
+
+== Development
+
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+== Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/relaton/relaton_w3c.
+
+
+== License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
