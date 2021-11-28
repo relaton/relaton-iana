@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "net/http"
+require "faraday"
 require "relaton_bib"
 require_relative "relaton_iana/version"
 require_relative "relaton_iana/iana_bibliography"

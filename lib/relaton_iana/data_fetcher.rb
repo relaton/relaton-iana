@@ -32,14 +32,31 @@ module RelatonIana
     #
     # Parse documents
     #
-    def fetch(page = 1) # rubocop:disable Metrics/AbcSize
-      uri = URI "https://api.github.com/search/code?q=<registry+repo:ietf-ribose/iana-registries+extension:xml&page=#{page}"
-      resp = Net::HTTP.get uri
-      json = JSON.parse resp
+    def fetch(page = 1) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      params = {
+        q: "<registry repo:ietf-ribose/iana-registries extension:xml",
+        page: page, per_page: 100
+      }
+      if ENV["GITHUB_TOKEN"]
+        headers = { "Authorization" => "token #{ENV['GITHUB_TOKEN']}" }
+      end
+      attempt = 0
+      json = {}
+      until attempt > 3 || json["items"]
+        if attempt.positive?
+          warn "Rate limit is reached. Retrying in 30 sec."
+          sleep 30
+        end
+        attempt += 1
+        resp = Faraday.get "https://api.github.com/search/code", params, headers
+        json = JSON.parse resp.body
+      end
+      raise StandardError, json["message"] if json["message"]
+
       json["items"].each do |item|
         fetch_doc URI.join(IanaBibliography::SOURCE, item["path"]).to_s
       end
-      fetch(page + 1) if (json["total_count"] - (page * 30)).positive?
+      fetch(page + 1) if (json["total_count"] - (page * 100)).positive?
     end
 
     def fetch_doc(url)

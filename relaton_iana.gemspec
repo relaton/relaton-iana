@@ -38,6 +38,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "vcr"
   spec.add_development_dependency "webmock"
 
+  spec.add_dependency "faraday", "~> 1.8.0"
   spec.add_dependency "relaton-bib", "~> 1.9.0"
 
   # Uncomment to register a new dependency of your gem

@@ -121,6 +121,10 @@ Done in: 155 sec.
 => nil
 ----
 
+This method uses GitHub search API to fetch the documents. The search API has a https://docs.github.com/en/rest/reference/search#rate-limit[rate limitaion] of 30 requests per minute for authenticated users and 10 requests per minute for unauthenticated users. Usually, the rate limit is not reached because the search API is used only for the files list fetching. But if you run the method multiple times in a short period, it is possible that the rate limit will be reached. In this case, the method will wait until the rate limit is reset.
+
+You can use pesonal access token to increase the rate limit. To do this, add your pesonal access token to the `GITHUB_TOKEN` environment variable.
+
 == Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

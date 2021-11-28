@@ -22,8 +22,8 @@ RSpec.describe RelatonIana::DataFetcher do
 
     context "fetch data" do
       before do
-        resp = '{"items":[{"path":"path/file.xml"}],"total_count":1}'
-        expect(Net::HTTP).to receive(:get).and_return resp
+        resp = double body: '{"items":[{"path":"path/file.xml"}],"total_count":1}'
+        expect(Faraday).to receive(:get).and_return resp
       end
 
       it "successfully" do
@@ -36,6 +36,22 @@ RSpec.describe RelatonIana::DataFetcher do
         expect(RelatonIana::Parser).to receive(:parse).and_raise(StandardError)
         expect { subject.fetch }.to output(/Error/).to_stderr
       end
+    end
+
+    it "use GITHUB_TOKEN" do
+      expect(ENV).to receive(:[]).with("GITHUB_TOKEN").and_return("1234").twice
+      allow(ENV).to receive(:[]).and_call_original
+      resp = double body: '{"items":[],"total_count":0}'
+      headers = { "Authorization" => "token 1234" }
+      expect(Faraday).to receive(:get).with(kind_of(String), kind_of(Hash), headers).and_return resp
+      subject.fetch
+    end
+
+    it "waite if rate limit is reached" do
+      resp = double body: '{"message":"API rate limit exceeded"}'
+      allow(Faraday).to receive(:get).and_return resp
+      expect(subject).to receive(:sleep).with(30).exactly(3).times
+      expect { subject.fetch }.to raise_error StandardError, "API rate limit exceeded"
     end
 
     context "save doc" do
