@@ -27,13 +27,22 @@ RSpec.describe RelatonIana::DataFetcher do
       end
 
       it "successfully" do
-        expect(RelatonIana::Parser).to receive(:parse).with(/path\/file\.xml/).and_return :bib
-        expect(subject).to receive(:save_doc).with(:bib)
+        resp = double code: "200", body: <<~XML
+          <registry  xmlns='http://www.iana.org/assignments'>
+            <registry></registry>
+          </registry>
+        XML
+        uri = URI.join RelatonIana::DataFetcher::SOURCE, "path/file.xml"
+        expect(Net::HTTP).to receive(:get_response).with(uri).and_return resp
+        expect(RelatonIana::Parser).to receive(:parse).with(kind_of(Nokogiri::XML::Element)).and_return :bib
+        expect(RelatonIana::Parser).to receive(:parse).with(kind_of(Nokogiri::XML::Element), :bib).and_return :bib
+        expect(subject).to receive(:save_doc).with(:bib).twice
         subject.fetch
       end
 
       it "warn when error" do
-        expect(RelatonIana::Parser).to receive(:parse).and_raise(StandardError)
+        expect(Net::HTTP).to receive(:get_response).and_raise(StandardError)
+        # expect(RelatonIana::Parser).to receive(:parse).and_raise(StandardError)
         expect { subject.fetch }.to output(/Error/).to_stderr
       end
     end

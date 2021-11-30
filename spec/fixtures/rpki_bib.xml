@@ -1,0 +1,22 @@
+<bibdata type="standard">
+  <fetched>2021-11-30</fetched>
+  <title format="text/plain">Resource Public Key Infrastructure (RPKI)</title>
+  <uri type="src">http://www.iana.org/assignments/rpki</uri>
+  <docidentifier type="IANA">IANA rpki</docidentifier>
+  <docnumber>rpki</docnumber>
+  <date type="created">
+    <on>2011-09-08</on>
+  </date>
+  <date type="updated">
+    <on>2021-11-08</on>
+  </date>
+  <contributor>
+    <role type="publisher"/>
+    <organization>
+      <name>Internet Assigned Numbers Authority</name>
+      <abbreviation>IANA</abbreviation>
+    </organization>
+  </contributor>
+  <language>en</language>
+  <script>Latn</script>
+</bibdata>

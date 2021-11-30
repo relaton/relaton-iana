@@ -1,5 +1,7 @@
 module RelatonIana
   class DataFetcher
+    SOURCE = "https://raw.githubusercontent.com/ietf-ribose/iana-registries/main/"
+
     #
     # Data fetcher initializer
     #
@@ -34,7 +36,7 @@ module RelatonIana
     #
     def fetch(page = 1) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       params = {
-        q: "<registry repo:ietf-ribose/iana-registries extension:xml",
+        q: "repo:ietf-ribose/iana-registries extension:xml",
         page: page, per_page: 100
       }
       if ENV["GITHUB_TOKEN"]
@@ -54,14 +56,24 @@ module RelatonIana
       raise StandardError, json["message"] if json["message"]
 
       json["items"].each do |item|
-        fetch_doc URI.join(IanaBibliography::SOURCE, item["path"]).to_s
+        fetch_doc URI.join(SOURCE, item["path"]).to_s
       end
       fetch(page + 1) if (json["total_count"] - (page * 100)).positive?
     end
 
-    def fetch_doc(url)
-      doc = Parser.parse url
-      save_doc doc
+    def fetch_doc(url) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+      resp = Net::HTTP.get_response URI(url)
+      if resp.code == "200"
+        return unless resp.body.include? "<registry"
+
+        xml = Nokogiri::XML(resp.body)
+        registry = xml.at("/xmlns:registry")
+        doc = Parser.parse registry
+        save_doc doc
+        registry.xpath("./xmlns:registry").each do |r|
+          save_doc Parser.parse(r, doc)
+        end
+      end
     rescue StandardError => e
       warn "Error: #{e.message}. URL: #{url}"
     end

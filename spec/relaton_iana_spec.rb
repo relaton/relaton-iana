@@ -12,13 +12,13 @@ RSpec.describe RelatonIana do
   end
 
   it "get document" do
-    VCR.use_cassette "service-names-port-numbers" do
-      bib = RelatonIana::IanaBibliography.get "IANA service-names-port-numbers"
+    VCR.use_cassette "auto-response-parameters" do
+      bib = RelatonIana::IanaBibliography.get "IANA auto-response-parameters"
       xml = bib.to_xml bibdata: true
-      file = "spec/fixtures/service-names-port-numbers.xml"
+      file = "spec/fixtures/auto-response-parameters.xml"
       File.write file, xml, encoding: "UTF-8" unless File.exist? file
       expect(xml).to be_equivalent_to File.read(file, encoding: "UTF-8")
-        .sub(/(?<=<fetched>)\d{4}-\d{2}-\d{2}(?=<\/fetched>)/, Date.today.to_s)
+        # .sub(/(?<=<fetched>)\d{4}-\d{2}-\d{2}(?=<\/fetched>)/, Date.today.to_s)
     end
   end
 end

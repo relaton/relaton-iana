@@ -3,22 +3,22 @@ module RelatonIana
     #
     # Document parser initalization
     #
-    # @param [String] url url
+    # @param [Nokogiri::XML::Element] xml
     #
-    def initialize(url)
-      resp = Net::HTTP.get_response URI(url)
-      @xml = Nokogiri::XML(resp.body).at "/xmlns:registry" if resp.code == "200"
+    def initialize(xml, rootdoc)
+      @xml = xml
+      @rootdoc = rootdoc
     end
 
     #
     # Initialize document parser and run it
     #
-    # @param [String] url url
+    # @param [Nokogiri::XML::Element] xml
     #
     # @return [RelatonBib:BibliographicItem, nil] bibliographic item
     #
-    def self.parse(url)
-      new(url).parse
+    def self.parse(xml, rootdoc = nil)
+      new(xml, rootdoc).parse
     end
 
     #
@@ -37,7 +37,7 @@ module RelatonIana
         title: parse_title,
         link: parse_link,
         docid: parse_docid,
-        docnumber: @xml["id"],
+        docnumber: docnumber,
         date: parse_date,
         contributor: contributor,
       )
@@ -49,7 +49,8 @@ module RelatonIana
     # @return [RelatonBib::TypedTitleStringCollection] title
     #
     def parse_title
-      t = RelatonBib::TypedTitleString.new content: @xml.at("./xmlns:title").text
+      content = @xml.at("./xmlns:title")&.text || @xml[:id]
+      t = RelatonBib::TypedTitleString.new content: content
       RelatonBib::TypedTitleStringCollection.new [t]
     end
 
@@ -59,8 +60,11 @@ module RelatonIana
     # @return [Array<RelatonBib::TypedUri>] link
     #
     def parse_link
-      uri = URI.join @xml.namespace.href.sub(/(?<=[^\/])$/, "/"), @xml[:id]
-      [RelatonBib::TypedUri.new(type: "src", content: uri.to_s)]
+      if @rootdoc then @rootdoc.link
+      else
+        uri = URI.join @xml.namespace.href.sub(/(?<=[^\/])$/, "/"), @xml[:id]
+        [RelatonBib::TypedUri.new(type: "src", content: uri.to_s)]
+      end
     end
 
     #
@@ -78,7 +82,13 @@ module RelatonIana
     # @return [String] PubID
     #
     def pub_id
-      "IANA #{@xml[:id]}"
+      "IANA #{docnumber}"
+    end
+
+    def docnumber
+      dn = ""
+      dn += "#{@rootdoc.docnumber}/" if @rootdoc
+      dn + @xml["id"]
     end
 
     #
@@ -87,9 +97,10 @@ module RelatonIana
     # @return [Array<RelatonBib::BibliographicDate>] date
     #
     def parse_date
-      @xml.xpath("./xmlns:created|./xmlns:published|./xmlns:updated").map do |d|
+      d = @xml.xpath("./xmlns:created|./xmlns:published|./xmlns:updated").map do |d|
         RelatonBib::BibliographicDate.new(type: d.name, on: d.text)
       end
+      d.none? && @rootdoc ? @rootdoc.date : d
     end
 
     #
