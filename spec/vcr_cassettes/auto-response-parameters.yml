@@ -23,7 +23,7 @@ http_interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '329'
+      - '333'
       Cache-Control:
       - max-age=300
       Content-Security-Policy:
@@ -31,7 +31,7 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"d494b023b710e6a28a96f5a4fe709c362f9df6d8578220ad84bbadf901a54911"
+      - W/"1b84bf6438e4f8d45c7da446a8257a782c050f8da63a8950f577d247cc079827"
       Strict-Transport-Security:
       - max-age=31536000
       X-Content-Type-Options:
@@ -41,29 +41,29 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       X-Github-Request-Id:
-      - A800:732A:48AA87:4C2DD4:61A61A34
+      - DF92:2CFF:E94D34:FA0F49:61F402CF
       Accept-Ranges:
       - bytes
       Date:
-      - Tue, 30 Nov 2021 12:33:57 GMT
+      - Fri, 28 Jan 2022 14:50:56 GMT
       Via:
       - 1.1 varnish
       X-Served-By:
-      - cache-vie6356-VIE
+      - cache-sof1510051-SOF
       X-Cache:
       - MISS
       X-Cache-Hits:
       - '0'
       X-Timer:
-      - S1638275637.918404,VS0,VE190
+      - S1643381456.922229,VS0,VE199
       Vary:
       - Authorization,Accept-Encoding,Origin
       Access-Control-Allow-Origin:
       - "*"
       X-Fastly-Request-Id:
-      - 6a33bf89d3a7a38590b7f56cbcf4c2721c933803
+      - 15c006459ef84a9602dbf5b2705c86c4d8ff47ef
       Expires:
-      - Tue, 30 Nov 2021 12:38:57 GMT
+      - Fri, 28 Jan 2022 14:55:56 GMT
       Source-Age:
       - '0'
     body:
@@ -72,14 +72,14 @@ http_interactions:
         ---
         id: IANAauto-response-parameters
         title:
-          content: Automatic Responses to Electronic Mail Parameters
+        - content: Automatic Responses to Electronic Mail Parameters
           format: text/plain
         link:
-          content: http://www.iana.org/assignments/auto-response-parameters
+        - content: http://www.iana.org/assignments/auto-response-parameters
           type: src
         type: standard
         docid:
-          id: IANA auto-response-parameters
+        - id: IANA auto-response-parameters
           type: IANA
         docnumber: auto-response-parameters
         date:
@@ -88,12 +88,16 @@ http_interactions:
         - type: updated
           value: '2009-01-23'
         contributor:
-          organization:
-            name: Internet Assigned Numbers Authority
+        - organization:
+            name:
+            - Internet Assigned Numbers Authority
             abbreviation: IANA
-          role: publisher
-        language: en
-        script: Latn
-        fetched: '2021-11-29'
-  recorded_at: Tue, 30 Nov 2021 12:33:57 GMT
+          role:
+          - publisher
+        language:
+        - en
+        script:
+        - Latn
+        fetched: '2022-01-27'
+  recorded_at: Fri, 28 Jan 2022 14:50:55 GMT
 recorded_with: VCR 6.0.0

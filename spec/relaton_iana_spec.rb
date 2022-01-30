@@ -17,8 +17,9 @@ RSpec.describe RelatonIana do
       xml = bib.to_xml bibdata: true
       file = "spec/fixtures/auto-response-parameters.xml"
       File.write file, xml, encoding: "UTF-8" unless File.exist? file
+      xml.sub!(/(?<=<fetched>)\d{4}-\d{2}-\d{2}(?=<\/fetched>)/, Date.today.to_s)
       expect(xml).to be_equivalent_to File.read(file, encoding: "UTF-8")
-        # .sub(/(?<=<fetched>)\d{4}-\d{2}-\d{2}(?=<\/fetched>)/, Date.today.to_s)
+        .sub(/(?<=<fetched>)\d{4}-\d{2}-\d{2}(?=<\/fetched>)/, Date.today.to_s)
     end
   end
 end
