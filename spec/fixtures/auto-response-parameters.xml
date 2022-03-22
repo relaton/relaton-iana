@@ -1,8 +1,8 @@
 <bibdata type="standard">
-  <fetched>2021-11-29</fetched>
+  <fetched>2022-02-09</fetched>
   <title format="text/plain">Automatic Responses to Electronic Mail Parameters</title>
   <uri type="src">http://www.iana.org/assignments/auto-response-parameters</uri>
-  <docidentifier type="IANA">IANA auto-response-parameters</docidentifier>
+  <docidentifier type="IANA" primary="true">IANA auto-response-parameters</docidentifier>
   <docnumber>auto-response-parameters</docnumber>
   <date type="created">
     <on>2004-06-18</on>
