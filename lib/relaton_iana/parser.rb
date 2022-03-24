@@ -75,8 +75,17 @@ module RelatonIana
     def parse_docid
       [
         RelatonBib::DocumentIdentifier.new(type: "IANA", id: pub_id, primary: true),
-        RelatonBib::DocumentIdentifier.new(type: "IANA", id: docnumber.upcase, scope: "anchor"),
+        RelatonBib::DocumentIdentifier.new(type: "IETF", id: anchor, scope: "anchor"),
       ]
+    end
+
+    #
+    # Create anchor
+    #
+    # @return [String] anchor
+    #
+    def anchor
+      docnumber.upcase.gsub("/", "__")
     end
 
     #
@@ -88,6 +97,11 @@ module RelatonIana
       "IANA #{docnumber}"
     end
 
+    #
+    # Create docnumber
+    #
+    # @return [String] docnumber
+    #
     def docnumber
       dn = ""
       dn += "#{@rootdoc.docnumber}/" if @rootdoc

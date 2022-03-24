@@ -20,5 +20,13 @@ RSpec.describe RelatonIana::Parser do
       expect(xml).to be_equivalent_to File.read(file, encoding: "UTF-8")
         .sub(/(?<=<fetched>)\d{4}-\d{2}-\d{2}(?=<\/fetched>)/, Date.today.to_s)
     end
+
+    it "replace slash in anchor" do
+      doc = xml.at "/xmlns:registry"
+      root_doc = RelatonIana::Parser.parse doc
+      registry = doc.at "./xmlns:registry"
+      parser = RelatonIana::Parser.new registry, root_doc
+      expect(parser.anchor).to eq "RPKI__SIGNED-OBJECTS"
+    end
   end
 end

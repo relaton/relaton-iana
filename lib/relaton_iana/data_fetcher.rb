@@ -34,6 +34,8 @@ module RelatonIana
     #
     # Parse documents
     #
+    # @param [Integer] page page number
+    #
     def fetch(page = 1) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       params = {
         q: "repo:ietf-ribose/iana-registries extension:xml",
@@ -61,6 +63,11 @@ module RelatonIana
       fetch(page + 1) if (json["total_count"] - (page * 100)).positive?
     end
 
+    #
+    # Fetch document
+    #
+    # @param [String] url url of document
+    #
     def fetch_doc(url) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
       resp = Net::HTTP.get_response URI(url)
       if resp.code == "200"
