@@ -3,8 +3,7 @@
   <title format="text/plain">Resource Public Key Infrastructure (RPKI)</title>
   <uri type="src">http://www.iana.org/assignments/rpki</uri>
   <docidentifier type="IANA" primary="true">IANA rpki</docidentifier>
-  <docidentifier type="IETF" scope="anchor">RPKI</docidentifier>
-  <docnumber>rpki</docnumber>
+  <docnumber>RPKI</docnumber>
   <date type="created">
     <on>2011-09-08</on>
   </date>

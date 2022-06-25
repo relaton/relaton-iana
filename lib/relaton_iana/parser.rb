@@ -37,7 +37,7 @@ module RelatonIana
         title: parse_title,
         link: parse_link,
         docid: parse_docid,
-        docnumber: docnumber,
+        docnumber: anchor,
         date: parse_date,
         contributor: contributor,
       )
@@ -75,7 +75,6 @@ module RelatonIana
     def parse_docid
       [
         RelatonBib::DocumentIdentifier.new(type: "IANA", id: pub_id, primary: true),
-        RelatonBib::DocumentIdentifier.new(type: "IETF", id: anchor, scope: "anchor"),
       ]
     end
 
