@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://raw.githubusercontent.com/relaton/relaton-data-iana/main/data/AUTO-RESPONSE-PARAMETERS.yaml
+    uri: https://raw.githubusercontent.com/relaton/relaton-data-iana/main/data/auto-response-parameters.yaml
     body:
       encoding: US-ASCII
       string: ''
@@ -23,7 +23,7 @@ http_interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '367'
+      - '345'
       Cache-Control:
       - max-age=300
       Content-Security-Policy:
@@ -31,7 +31,7 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"d4b8773fe230e056c329df5fda132006010be7d6a66dc8eee9bb394e6d6c361b"
+      - W/"19a22275e6970a06f0f00c93acb09a54ee0c421caa67a9c3efcf71ce6d9ecc7c"
       Strict-Transport-Security:
       - max-age=31536000
       X-Content-Type-Options:
@@ -41,29 +41,29 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       X-Github-Request-Id:
-      - 6654:917D:491BCF:61BEAF:62BDDCA4
+      - E128:8140:312C4:45FCE:62BEC4BF
       Accept-Ranges:
       - bytes
       Date:
-      - Thu, 30 Jun 2022 17:25:56 GMT
+      - Fri, 01 Jul 2022 09:56:15 GMT
       Via:
       - 1.1 varnish
       X-Served-By:
-      - cache-vie6349-VIE
+      - cache-vie6379-VIE
       X-Cache:
       - MISS
       X-Cache-Hits:
       - '0'
       X-Timer:
-      - S1656609957.582101,VS0,VE187
+      - S1656669376.667186,VS0,VE161
       Vary:
       - Authorization,Accept-Encoding,Origin
       Access-Control-Allow-Origin:
       - "*"
       X-Fastly-Request-Id:
-      - 6fb12fe2be63659faaabdcaa4a45b808d8787e51
+      - 68a28b4b47917e3515f1020e25bf3d5cd3130085
       Expires:
-      - Thu, 30 Jun 2022 17:30:56 GMT
+      - Fri, 01 Jul 2022 10:01:15 GMT
       Source-Age:
       - '0'
     body:
@@ -82,7 +82,7 @@ http_interactions:
         - id: IANA auto-response-parameters
           type: IANA
           primary: true
-        docnumber: AUTO-RESPONSE-PARAMETERS
+        docnumber: auto-response-parameters
         date:
         - type: created
           value: '2004-06-18'
@@ -99,6 +99,6 @@ http_interactions:
         - en
         script:
         - Latn
-        fetched: '2022-06-30'
-  recorded_at: Thu, 30 Jun 2022 17:25:56 GMT
+        fetched: '2022-07-01'
+  recorded_at: Fri, 01 Jul 2022 09:56:15 GMT
 recorded_with: VCR 6.1.0

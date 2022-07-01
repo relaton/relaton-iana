@@ -8,7 +8,7 @@ module RelatonIana
     # @param text [String]
     # @return [RelatonBib::BibliographicItem]
     def search(text) # rubocop:disable Metrics/MethodLength
-      file = text.sub(/^IANA\s/, "").gsub(/[\s,:\/]/, "_").upcase
+      file = text.sub(/^IANA\s/, "").gsub(/[\s,:\/]/, "_").downcase
       url = "#{SOURCE}#{file}.yaml"
       resp = Net::HTTP.get_response URI(url)
       hash = YAML.safe_load resp.body
