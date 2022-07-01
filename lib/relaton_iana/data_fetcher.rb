@@ -24,7 +24,7 @@ module RelatonIana
     def self.fetch(output: "data", format: "yaml")
       t1 = Time.now
       puts "Started at: #{t1}"
-      FileUtils.mkdir_p output unless Dir.exist? output
+      FileUtils.mkdir_p output
       new(output, format).fetch
       t2 = Time.now
       puts "Stopped at: #{t2}"
@@ -115,7 +115,7 @@ module RelatonIana
     # @return [String] file name
     #
     def file_name(bib)
-      name = bib.docnumber.gsub(/[\s,:\/]/, "_").squeeze("_")
+      name = bib.docnumber.downcase.gsub(/[\s,:\/]/, "_").squeeze("_")
       File.join @output, "#{name}.#{@ext}"
     end
   end

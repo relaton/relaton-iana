@@ -1,6 +1,5 @@
 RSpec.describe RelatonIana::DataFetcher do
   it "create output dir and run fetcher" do
-    expect(Dir).to receive(:exist?).with("dir").and_return(false)
     expect(FileUtils).to receive(:mkdir_p).with("dir")
     fetcher = double("fetcher")
     expect(fetcher).to receive(:fetch)
@@ -70,7 +69,7 @@ RSpec.describe RelatonIana::DataFetcher do
       end
 
       it "bibxml" do
-        bib = double("bib", docnumber: "bib")
+        bib = double("bib", docnumber: "BIB")
         expect(bib).to receive(:to_bibxml).and_return("<xml/>")
         expect(File).to receive(:write)
           .with("dir/bib.xml", "<xml/>", encoding: "UTF-8")
@@ -79,7 +78,7 @@ RSpec.describe RelatonIana::DataFetcher do
 
       it "xml" do
         subject.instance_variable_set(:@format, "xml")
-        bib = double("bib", docnumber: "bib")
+        bib = double("bib", docnumber: "BIB")
         expect(bib).to receive(:to_xml).with(bibdata: true).and_return("<xml/>")
         expect(File).to receive(:write)
           .with("dir/bib.xml", "<xml/>", encoding: "UTF-8")
@@ -89,7 +88,7 @@ RSpec.describe RelatonIana::DataFetcher do
       it "yaml" do
         subject.instance_variable_set(:@format, "yaml")
         subject.instance_variable_set(:@ext, "yaml")
-        bib = double("bib", docnumber: "bib")
+        bib = double("bib", docnumber: "BIB")
         expect(bib).to receive(:to_hash).and_return({ id: 123 })
         expect(File).to receive(:write)
           .with("dir/bib.yaml", /id: 123/, encoding: "UTF-8")
@@ -98,7 +97,7 @@ RSpec.describe RelatonIana::DataFetcher do
 
       it "warn when file exists" do
         subject.instance_variable_set(:@files, ["dir/bib.xml"])
-        bib = double("bib", docnumber: "bib")
+        bib = double("bib", docnumber: "BIB")
         expect(bib).to receive(:to_bibxml).and_return("<xml/>")
         expect(File).to receive(:write)
           .with("dir/bib.xml", "<xml/>", encoding: "UTF-8")

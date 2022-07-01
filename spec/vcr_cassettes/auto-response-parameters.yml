@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://raw.githubusercontent.com/relaton/relaton-data-iana/main/data/auto-response-parameters.yaml
+    uri: https://raw.githubusercontent.com/relaton/relaton-data-iana/main/data/AUTO-RESPONSE-PARAMETERS.yaml
     body:
       encoding: US-ASCII
       string: ''
@@ -23,7 +23,7 @@ http_interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '382'
+      - '367'
       Cache-Control:
       - max-age=300
       Content-Security-Policy:
@@ -31,7 +31,7 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"5b5eff9eaa6e1f5851a9be80331e9f926a93faad9f0aba70544feda71249e5c4"
+      - W/"d4b8773fe230e056c329df5fda132006010be7d6a66dc8eee9bb394e6d6c361b"
       Strict-Transport-Security:
       - max-age=31536000
       X-Content-Type-Options:
@@ -41,29 +41,29 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       X-Github-Request-Id:
-      - DE86:2B06:A6D7BC:B118EA:62B4851F
+      - 6654:917D:491BCF:61BEAF:62BDDCA4
       Accept-Ranges:
       - bytes
       Date:
-      - Thu, 23 Jun 2022 15:22:07 GMT
+      - Thu, 30 Jun 2022 17:25:56 GMT
       Via:
       - 1.1 varnish
       X-Served-By:
-      - cache-vie6346-VIE
+      - cache-vie6349-VIE
       X-Cache:
       - MISS
       X-Cache-Hits:
       - '0'
       X-Timer:
-      - S1655997728.835157,VS0,VE164
+      - S1656609957.582101,VS0,VE187
       Vary:
       - Authorization,Accept-Encoding,Origin
       Access-Control-Allow-Origin:
       - "*"
       X-Fastly-Request-Id:
-      - e4a2b21e8994c89feb780b806cb5c42c7ed95e3c
+      - 6fb12fe2be63659faaabdcaa4a45b808d8787e51
       Expires:
-      - Thu, 23 Jun 2022 15:27:07 GMT
+      - Thu, 30 Jun 2022 17:30:56 GMT
       Source-Age:
       - '0'
     body:
@@ -82,10 +82,7 @@ http_interactions:
         - id: IANA auto-response-parameters
           type: IANA
           primary: true
-        - id: AUTO-RESPONSE-PARAMETERS
-          type: IETF
-          scope: anchor
-        docnumber: auto-response-parameters
+        docnumber: AUTO-RESPONSE-PARAMETERS
         date:
         - type: created
           value: '2004-06-18'
@@ -102,6 +99,6 @@ http_interactions:
         - en
         script:
         - Latn
-        fetched: '2022-06-23'
-  recorded_at: Thu, 23 Jun 2022 15:22:07 GMT
+        fetched: '2022-06-30'
+  recorded_at: Thu, 30 Jun 2022 17:25:56 GMT
 recorded_with: VCR 6.1.0

@@ -37,7 +37,7 @@ module RelatonIana
         title: parse_title,
         link: parse_link,
         docid: parse_docid,
-        docnumber: anchor,
+        docnumber: docnumber,
         date: parse_date,
         contributor: contributor,
       )
@@ -73,9 +73,7 @@ module RelatonIana
     # @return [Arra<RelatonBib::DocumentIdentifier>] docidentifier
     #
     def parse_docid
-      [
-        RelatonBib::DocumentIdentifier.new(type: "IANA", id: pub_id, primary: true),
-      ]
+      [RelatonBib::DocumentIdentifier.new(type: "IANA", id: pub_id, primary: true)]
     end
 
     #
