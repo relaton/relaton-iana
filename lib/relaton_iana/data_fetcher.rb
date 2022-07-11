@@ -38,7 +38,7 @@ module RelatonIana
     #
     def fetch(page = 1) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       params = {
-        q: "repo:ietf-ribose/iana-registries extension:xml",
+        q: "repo:ietf-tools/iana-registries extension:xml",
         page: page, per_page: 100
       }
       if ENV["GITHUB_TOKEN"]
