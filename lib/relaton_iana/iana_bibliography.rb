@@ -11,6 +11,8 @@ module RelatonIana
       file = text.sub(/^IANA\s/, "").gsub(/[\s,:\/]/, "_").downcase
       url = "#{SOURCE}#{file}.yaml"
       resp = Net::HTTP.get_response URI(url)
+      return unless resp.code == "200"
+
       hash = YAML.safe_load resp.body
       RelatonBib::BibliographicItem.from_hash hash
     rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET,

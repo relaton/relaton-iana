@@ -22,4 +22,11 @@ RSpec.describe RelatonIana do
         .sub(/(?<=<fetched>)\d{4}-\d{2}-\d{2}(?=<\/fetched>)/, Date.today.to_s)
     end
   end
+
+  it "not found document" do
+    VCR.use_cassette "not-found" do
+      bib = RelatonIana::IanaBibliography.get "IANA Link Relation Types"
+      expect(bib).to be_nil
+    end
+  end
 end
