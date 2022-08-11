@@ -46,10 +46,14 @@ module RelatonIana
       end
       attempt = 0
       json = {}
+      resp = nil
       until attempt > 3 || json["items"]
         if attempt.positive?
-          warn "Rate limit is reached. Retrying in 30 sec."
-          sleep 30
+          t = resp.headers["x-ratelimit-reset"].to_i - Time.now.to_i
+          if t.positive?
+            warn "Rate limit is reached. Retrying in #{t} sec."
+            sleep t
+          end
         end
         attempt += 1
         resp = Faraday.get "https://api.github.com/search/code", params, headers
