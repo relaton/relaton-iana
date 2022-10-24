@@ -31,7 +31,6 @@ module RelatonIana
 
       RelatonBib::BibliographicItem.new(
         type: "standard",
-        fetched: Date.today.to_s,
         language: ["en"],
         script: ["Latn"],
         title: parse_title,

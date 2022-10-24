@@ -23,7 +23,7 @@ http_interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '344'
+      - '350'
       Cache-Control:
       - max-age=300
       Content-Security-Policy:
@@ -31,7 +31,7 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"b8851dc1afdd2b2332c425b43959387065f96863be87f798c265723f2357d760"
+      - W/"9befe054485912098309d6338c9ee5dec58bfa0b69e2244e3c65cd6d8e2ea87d"
       Strict-Transport-Security:
       - max-age=31536000
       X-Content-Type-Options:
@@ -41,29 +41,29 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       X-Github-Request-Id:
-      - 9BD2:A4E4:B449F9:C91C57:62FFBF36
+      - '0804:18A2:378335:5F6BE4:6356EC06'
       Accept-Ranges:
       - bytes
       Date:
-      - Fri, 19 Aug 2022 16:49:59 GMT
+      - Mon, 24 Oct 2022 19:48:22 GMT
       Via:
       - 1.1 varnish
       X-Served-By:
-      - cache-vie6345-VIE
+      - cache-iad-kcgs7200150-IAD
       X-Cache:
       - MISS
       X-Cache-Hits:
       - '0'
       X-Timer:
-      - S1660927799.972828,VS0,VE223
+      - S1666640902.350593,VS0,VE94
       Vary:
       - Authorization,Accept-Encoding,Origin
       Access-Control-Allow-Origin:
       - "*"
       X-Fastly-Request-Id:
-      - 97cabb97361a30d24f282e733c47d0ee6397d79f
+      - 4dbbdfdc08149a2323288dd0253edcee5e859c67
       Expires:
-      - Fri, 19 Aug 2022 16:54:59 GMT
+      - Mon, 24 Oct 2022 19:53:22 GMT
       Source-Age:
       - '0'
     body:
@@ -91,14 +91,15 @@ http_interactions:
         contributor:
         - organization:
             name:
-            - Internet Assigned Numbers Authority
-            abbreviation: IANA
+            - content: Internet Assigned Numbers Authority
+            abbreviation:
+              content: IANA
           role:
           - publisher
         language:
         - en
         script:
         - Latn
-        fetched: '2022-08-19'
-  recorded_at: Fri, 19 Aug 2022 16:49:59 GMT
+        fetched: '2022-10-24'
+  recorded_at: Mon, 24 Oct 2022 19:48:22 GMT
 recorded_with: VCR 6.1.0

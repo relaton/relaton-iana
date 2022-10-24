@@ -1,5 +1,4 @@
 <bibdata type="standard">
-  <fetched>2022-07-01</fetched>
   <title format="text/plain">Resource Public Key Infrastructure (RPKI)</title>
   <uri type="src">http://www.iana.org/assignments/rpki</uri>
   <docidentifier type="IANA" primary="true">IANA rpki</docidentifier>
