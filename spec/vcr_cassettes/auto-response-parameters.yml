@@ -23,7 +23,7 @@ http_interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '350'
+      - '333'
       Cache-Control:
       - max-age=300
       Content-Security-Policy:
@@ -31,7 +31,7 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"9befe054485912098309d6338c9ee5dec58bfa0b69e2244e3c65cd6d8e2ea87d"
+      - W/"9645749846e02710cc430852850fdee1350807773e34b34ddac6f6f59214bf36"
       Strict-Transport-Security:
       - max-age=31536000
       X-Content-Type-Options:
@@ -41,29 +41,29 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       X-Github-Request-Id:
-      - '0804:18A2:378335:5F6BE4:6356EC06'
+      - F228:2BCD:30664:58511:63800F8C
       Accept-Ranges:
       - bytes
       Date:
-      - Mon, 24 Oct 2022 19:48:22 GMT
+      - Fri, 25 Nov 2022 00:42:52 GMT
       Via:
       - 1.1 varnish
       X-Served-By:
-      - cache-iad-kcgs7200150-IAD
+      - cache-atl18455-ATL
       X-Cache:
       - MISS
       X-Cache-Hits:
       - '0'
       X-Timer:
-      - S1666640902.350593,VS0,VE94
+      - S1669336973.843929,VS0,VE134
       Vary:
       - Authorization,Accept-Encoding,Origin
       Access-Control-Allow-Origin:
       - "*"
       X-Fastly-Request-Id:
-      - 4dbbdfdc08149a2323288dd0253edcee5e859c67
+      - 28ced64f450e84722913f9334f7157a6bee4a7a6
       Expires:
-      - Mon, 24 Oct 2022 19:53:22 GMT
+      - Fri, 25 Nov 2022 00:47:52 GMT
       Source-Age:
       - '0'
     body:
@@ -95,11 +95,10 @@ http_interactions:
             abbreviation:
               content: IANA
           role:
-          - publisher
+          - type: publisher
         language:
         - en
         script:
         - Latn
-        fetched: '2022-10-24'
-  recorded_at: Mon, 24 Oct 2022 19:48:22 GMT
+  recorded_at: Fri, 25 Nov 2022 00:42:52 GMT
 recorded_with: VCR 6.1.0

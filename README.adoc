@@ -2,7 +2,7 @@
 
 RelatonIana is a Ruby gem that implements the https://github.com/metanorma/metanorma-model-iso#iso-bibliographic-item[IsoBibliographicItem model].
 
-You can use it to retrieve metadata of W3C Standards from https://w3.org, and access such metadata through the `BibliographicItem` object.
+You can use it to retrieve metadata of W3C Standards from https://w3.org, and access such metadata through the `IanaBibliographicItem` object.
 
 == Installation
 
@@ -33,7 +33,7 @@ require 'relaton_iana'
 item = RelatonIana::IanaBibliography.get "IANA service-names-port-numbers" 
 [relaton-iana] ("IANA service-names-port-numbers") fetching...
 [relaton-iana] ("IANA service-names-port-numbers") found IANA service-names-port-numbers
-=> #<RelatonBib::BibliographicItem:0x00007f7c6cc024d0
+=> #<RelatonIana::IanaBibliographicItem:0x00007f7c6cc024d0
 ...
 ----
 
@@ -80,7 +80,7 @@ item.link.first.content
 [source,ruby]
 ----
 RelatonBib::XMLParser.from_xml File.read('spec/fixtures/service-names-port-numbers.xml')
-=> #<RelatonBib::BibliographicItem:0x00007f7c6b837248
+=> #<RelatonIana::IanaBibliographicItem:0x00007f7c6b837248
 ...
 ----
 
@@ -97,20 +97,20 @@ bib_hash = RelatonIana::HashConverter.hash_to_bib hash
  :title=>{:content=>"Service Name and Transport Protocol Port Number Registry", :format=>"text/plain"},
 ...
 
-RelatonBib::BibliographicItem.new **bib_hash
-=> #<RelatonBib::BibliographicItem:0x007f9381ec6a00
+RelatonIana::IanaBibliographicItem.new **bib_hash
+=> #<RelatonIana::IanaBibliographicItem:0x007f9381ec6a00
 ...
 ----
 
 === Fetch data
 
-There is a IANA dataset https://github.com/ietf-ribose/iana-registries which can be converted into RelatonXML/BibXML/BibYAML formats.
+There is an IANA dataset https://github.com/ietf-ribose/iana-registries which can be converted into RelatonXML/BibXML/BibYAML formats.
 
 The method `RelatonIana::DataFetcher.fetch(output: "data", format: "yaml")` converts all the documents from the dataset and save them to the `./data` folder in YAML format.
 Arguments:
 
 - `output` - folder to save documents (default './data').
-- `format` - format in which the documents are saved. Possimle formats are: `yaml`, `xml`, `bibxml` (default `yaml`).
+- `format` - the format in which the documents are saved. Possible formats are: `yaml`, `xml`, `bibxml` (default `yaml`).
 
 [source,ruby]
 ----
@@ -121,9 +121,9 @@ Done in: 155 sec.
 => nil
 ----
 
-This method uses GitHub search API to fetch the documents. The search API has a https://docs.github.com/en/rest/reference/search#rate-limit[rate limitaion] of 30 requests per minute for authenticated users and 10 requests per minute for unauthenticated users. Usually, the rate limit is not reached because the search API is used only for the files list fetching. But if you run the method multiple times in a short period, it is possible that the rate limit will be reached. In this case, the method will wait until the rate limit is reset.
+This method uses GitHub search API to fetch the documents. The search API has a https://docs.github.com/en/rest/reference/search#rate-limit[rate limitaion] of 30 requests per minute for authenticated users and 10 requests per minute for unauthenticated users. Usually, the rate limit is not reached because the search API is used only for the file list fetching. But if you run the method multiple times in a short period, the rate limit may be reached. In this case, the method will wait until the rate limit is reset.
 
-You can use pesonal access token to increase the rate limit. To do this, add your pesonal access token to the `GITHUB_TOKEN` environment variable.
+You can use a personal access token to increase the rate limit. To do this, add your personal access token to the `GITHUB_TOKEN` environment variable.
 
 == Development
 

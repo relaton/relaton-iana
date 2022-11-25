@@ -15,7 +15,7 @@ module RelatonIana
     #
     # @param [Nokogiri::XML::Element] xml
     #
-    # @return [RelatonBib:BibliographicItem, nil] bibliographic item
+    # @return [RelatonIana::IanaBibliographicItem, nil] bibliographic item
     #
     def self.parse(xml, rootdoc = nil)
       new(xml, rootdoc).parse
@@ -24,12 +24,12 @@ module RelatonIana
     #
     # Parse document
     #
-    # @return [RelatonBib:BibliographicItem, nil] bibliographic item
+    # @return [RelatonIana::IanaBibliographicItem, nil] bibliographic item
     #
     def parse # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
       return unless @xml
 
-      RelatonBib::BibliographicItem.new(
+      RelatonIana::IanaBibliographicItem.new(
         type: "standard",
         language: ["en"],
         script: ["Latn"],
