@@ -92,7 +92,7 @@ module RelatonIana
     #
     # Save document to file
     #
-    # @param [RelatonW3c::W3cBibliographicItem, nil] bib bibliographic item
+    # @param [RelatonIana::IanaBibliographicItem, nil] bib bibliographic item
     #
     def save_doc(bib) # rubocop:disable Metrics/MethodLength
       return unless bib
@@ -114,7 +114,7 @@ module RelatonIana
     #
     # Generate file name
     #
-    # @param [RelatonW3c::W3cBibliographicItem] bib bibliographic item
+    # @param [RelatonIana::IanaBibliographicItem] bib bibliographic item
     #
     # @return [String] file name
     #

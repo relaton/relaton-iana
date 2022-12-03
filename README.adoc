@@ -42,25 +42,13 @@ item = RelatonIana::IanaBibliography.get "IANA service-names-port-numbers"
 [source,ruby]
 ----
 item.to_xml
-=> "<bibitem id="IANAservice-names-port-numbers" type="standard">
-  <fetched>2021-11-24</fetched>
-  <title format="text/plain">Service Name and Transport Protocol Port Number Registry</title>
-  <uri type="src">http://www.iana.org/assignments/service-names-port-numbers</uri>
-  <docidentifier type="IANA">IANA service-names-port-numbers</docidentifier>
-  <docnumber>service-names-port-numbers</docnumber>
-  <date type="updated">
-    <on>2021-11-12</on>
-  </date>
-  <contributor>
-    <role type="publisher"/>
-    <organization>
-      <name>Internet Assigned Numbers Authority</name>
-      <abbreviation>IANA</abbreviation>
-    </organization>
-  </contributor>
-  <language>en</language>
-  <script>Latn</script>
-</bibitem>"
+=> "<bibitem id="IANAservice-names-port-numbers" type="standard" schema-version="v1.2.1">
+      <fetched>2022-12-03</fetched>
+      <title format="text/plain">Service Name and Transport Protocol Port Number Registry</title>
+      <uri type="src">http://www.iana.org/assignments/service-names-port-numbers</uri>
+      <docidentifier type="IANA" primary="true">IANA service-names-port-numbers</docidentifier>
+      ...
+    </bibitem>"
 ----
 
 === Typed links
@@ -79,22 +67,22 @@ item.link.first.content
 === Create bibliographic item from XML
 [source,ruby]
 ----
-RelatonBib::XMLParser.from_xml File.read('spec/fixtures/service-names-port-numbers.xml')
-=> #<RelatonIana::IanaBibliographicItem:0x00007f7c6b837248
+RelatonIana::XMLParser.from_xml File.read('spec/fixtures/auto-response-parameters.xml')
+=> #<RelatonIana::IanaBibliographicItem:0x00007fa5da1bd118
 ...
 ----
 
 === Create bibliographic item from YAML
 [source,ruby]
 ----
-hash = YAML.load_file 'spec/fixtures/service-names-port-numbers.yaml'
-=> {"id"=>"IANAservice-names-port-numbers",
- "title"=>{"content"=>"Service Name and Transport Protocol Port Number Registry", "format"=>"text/plain"},
+YAML.load_file 'spec/fixtures/auto-response-parameters.yaml'
+=> {"schema-version"=>"v1.2.1",
+ "id"=>"IANAauto-response-parameters",
 ...
 
 bib_hash = RelatonIana::HashConverter.hash_to_bib hash
-=> {:id=>"IANAservice-names-port-numbers",
- :title=>{:content=>"Service Name and Transport Protocol Port Number Registry", :format=>"text/plain"},
+=> {:"schema-version"=>"v1.2.1",
+ :id=>"IANAauto-response-parameters",
 ...
 
 RelatonIana::IanaBibliographicItem.new **bib_hash
@@ -106,7 +94,7 @@ RelatonIana::IanaBibliographicItem.new **bib_hash
 
 There is an IANA dataset https://github.com/ietf-ribose/iana-registries which can be converted into RelatonXML/BibXML/BibYAML formats.
 
-The method `RelatonIana::DataFetcher.fetch(output: "data", format: "yaml")` converts all the documents from the dataset and save them to the `./data` folder in YAML format.
+The method `RelatonIana::DataFetcher.fetch(output: "data", format: "yaml")` converts all the documents from the dataset and saves them to the `./data` folder in YAML format.
 Arguments:
 
 - `output` - folder to save documents (default './data').

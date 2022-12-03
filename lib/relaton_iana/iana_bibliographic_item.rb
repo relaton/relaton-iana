@@ -2,10 +2,12 @@ module RelatonIana
   # IANA Bibliographic Item
   class IanaBibliographicItem < RelatonBib::BibliographicItem
     #
-    # Render BubXML date. Overridden to remove date.
+    # Fetch flavor schema version
     #
-    # @param builder [Nokogiri::XML::Builder]
+    # @return [String] flavor schema version
     #
-    # def render_date(builder); end
+    def ext_schema
+      @ext_schema ||= schema_versions["relaton-model-iana"]
+    end
   end
 end

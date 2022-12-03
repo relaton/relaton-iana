@@ -1,5 +1,5 @@
-<bibdata type="standard">
-  <fetched>2022-07-01</fetched>
+<bibdata type="standard" schema-version="v1.2.1">
+  <fetched>2022-11-25</fetched>
   <title format="text/plain">Automatic Responses to Electronic Mail Parameters</title>
   <uri type="src">http://www.iana.org/assignments/auto-response-parameters</uri>
   <docidentifier type="IANA" primary="true">IANA auto-response-parameters</docidentifier>

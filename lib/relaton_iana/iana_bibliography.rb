@@ -14,6 +14,7 @@ module RelatonIana
       return unless resp.code == "200"
 
       hash = YAML.safe_load resp.body
+      hash["fetched"] = Date.today.to_s
       IanaBibliographicItem.from_hash hash
     rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET,
            EOFError, Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError,
