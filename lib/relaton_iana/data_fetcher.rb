@@ -51,6 +51,7 @@ module RelatonIana
         if attempt.positive?
           t = resp.headers["x-ratelimit-reset"].to_i - Time.now.to_i
           if t.positive?
+            t += 30
             warn "Rate limit is reached. Retrying in #{t} sec."
             sleep t
           end

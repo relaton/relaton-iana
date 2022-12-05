@@ -59,7 +59,7 @@ RSpec.describe RelatonIana::DataFetcher do
       resp = double "Response", body: '{"message":"API rate limit exceeded"}',
                                 headers: { "x-ratelimit-reset" => (Time.now + 30).to_i }
       allow(Faraday).to receive(:get).and_return resp
-      expect(subject).to receive(:sleep).with(30).exactly(3).times
+      expect(subject).to receive(:sleep).with(60).exactly(3).times
       expect { subject.fetch }.to raise_error StandardError, "API rate limit exceeded"
     end
 
