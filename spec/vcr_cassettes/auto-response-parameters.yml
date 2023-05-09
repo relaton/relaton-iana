@@ -23,7 +23,7 @@ http_interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '333'
+      - '656'
       Cache-Control:
       - max-age=300
       Content-Security-Policy:
@@ -31,7 +31,7 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"9645749846e02710cc430852850fdee1350807773e34b34ddac6f6f59214bf36"
+      - W/"ca0f7612b6b13ef9696fa20548312ecb60a78394e8dd1ff330910cb9448562b0"
       Strict-Transport-Security:
       - max-age=31536000
       X-Content-Type-Options:
@@ -41,35 +41,36 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       X-Github-Request-Id:
-      - FF82:18E1:102E03:32E28F:638B9720
+      - 72A8:72D9:2822C0:2EE548:64552D47
       Accept-Ranges:
       - bytes
       Date:
-      - Sat, 03 Dec 2022 18:36:16 GMT
+      - Fri, 05 May 2023 16:22:31 GMT
       Via:
       - 1.1 varnish
       X-Served-By:
-      - cache-atl18440-ATL
+      - cache-atl18485-ATL
       X-Cache:
       - MISS
       X-Cache-Hits:
       - '0'
       X-Timer:
-      - S1670092576.054601,VS0,VE96
+      - S1683303752.515627,VS0,VE96
       Vary:
       - Authorization,Accept-Encoding,Origin
       Access-Control-Allow-Origin:
       - "*"
       X-Fastly-Request-Id:
-      - d07d284eb9ae19b5da8afabab04c605bb1fdde5c
+      - 62f63e34798f642ac3f7702e89ecbd35b423ca29
       Expires:
-      - Sat, 03 Dec 2022 18:41:16 GMT
+      - Fri, 05 May 2023 16:27:31 GMT
       Source-Age:
       - '0'
     body:
       encoding: ASCII-8BIT
       string: |
         ---
+        schema-version: v1.2.3
         id: IANAauto-response-parameters
         title:
         - content: Automatic Responses to Electronic Mail Parameters
@@ -100,5 +101,7 @@ http_interactions:
         - en
         script:
         - Latn
-  recorded_at: Sat, 03 Dec 2022 18:36:16 GMT
+        ext:
+          schema-version: v1.0.0
+  recorded_at: Fri, 05 May 2023 16:22:31 GMT
 recorded_with: VCR 6.1.0

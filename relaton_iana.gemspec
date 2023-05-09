@@ -30,17 +30,9 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "equivalent-xml", "~> 0.6"
-  spec.add_development_dependency "rubocop"
-  spec.add_development_dependency "rubocop-performance"
-  spec.add_development_dependency "rubocop-rails"
-  spec.add_development_dependency "ruby-jing"
-  spec.add_development_dependency "simplecov"
-  spec.add_development_dependency "vcr"
-  spec.add_development_dependency "webmock"
 
-  spec.add_dependency "faraday", "~> 1.0"
+  spec.add_dependency "faraday", "~> 2.7.0"
   spec.add_dependency "relaton-bib", "~> 1.14.0"
-  spec.add_dependency "ruby-jing"
 
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"

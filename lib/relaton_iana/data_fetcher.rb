@@ -34,60 +34,21 @@ module RelatonIana
     #
     # Parse documents
     #
-    # @param [Integer] page page number
-    #
-    def fetch(page = 1) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-      params = {
-        q: "repo:ietf-tools/iana-registries extension:xml",
-        page: page, per_page: 100
-      }
-      if ENV["GITHUB_TOKEN"]
-        headers = { "Authorization" => "token #{ENV['GITHUB_TOKEN']}" }
+    def fetch
+      Dir["iana-registries/**/*.xml"].each do |file|
+        content = File.read file, encoding: "UTF-8"
+        parse(content) if content.include? "<registry"
+      rescue StandardError => e
+        warn "Error: #{e.message}. File: #{file}"
       end
-      attempt = 0
-      json = {}
-      resp = nil
-      until attempt > 3 || json["items"]
-        if attempt.positive?
-          t = resp.headers["x-ratelimit-reset"].to_i - Time.now.to_i
-          if t.positive?
-            t += 30
-            warn "Rate limit is reached. Retrying in #{t} sec."
-            sleep t
-          end
-        end
-        attempt += 1
-        resp = Faraday.get "https://api.github.com/search/code", params, headers
-        json = JSON.parse resp.body
-      end
-      raise StandardError, json["message"] if json["message"]
-
-      json["items"].each do |item|
-        fetch_doc URI.join(SOURCE, item["path"]).to_s
-      end
-      fetch(page + 1) if (json["total_count"] - (page * 100)).positive?
     end
 
-    #
-    # Fetch document
-    #
-    # @param [String] url url of document
-    #
-    def fetch_doc(url) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-      resp = Net::HTTP.get_response URI(url)
-      if resp.code == "200"
-        return unless resp.body.include? "<registry"
-
-        xml = Nokogiri::XML(resp.body)
-        registry = xml.at("/xmlns:registry")
-        doc = Parser.parse registry
-        save_doc doc
-        registry.xpath("./xmlns:registry").each do |r|
-          save_doc Parser.parse(r, doc)
-        end
-      end
-    rescue StandardError => e
-      warn "Error: #{e.message}. URL: #{url}"
+    def parse(content)
+      xml = Nokogiri::XML(content)
+      registry = xml.at("/xmlns:registry")
+      doc = Parser.parse registry
+      save_doc doc
+      registry.xpath("./xmlns:registry").each { |r| save_doc Parser.parse(r, doc) }
     end
 
     #

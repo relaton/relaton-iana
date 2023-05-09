@@ -21,46 +21,28 @@ RSpec.describe RelatonIana::DataFetcher do
 
     context "fetch data" do
       before do
-        resp = double body: '{"items":[{"path":"path/file.xml"}],"total_count":1}'
-        expect(Faraday).to receive(:get).and_return resp
+        expect(Dir).to receive(:[]).with("iana-registries/**/*.xml").and_return ["file.xml"]
       end
 
       it "successfully" do
-        resp = double code: "200", body: <<~XML
-          <registry  xmlns='http://www.iana.org/assignments'>
-            <registry></registry>
-          </registry>
-        XML
-        uri = URI.join RelatonIana::DataFetcher::SOURCE, "path/file.xml"
-        expect(Net::HTTP).to receive(:get_response).with(uri).and_return resp
-        expect(RelatonIana::Parser).to receive(:parse).with(kind_of(Nokogiri::XML::Element)).and_return :bib
-        expect(RelatonIana::Parser).to receive(:parse).with(kind_of(Nokogiri::XML::Element), :bib).and_return :bib
-        expect(subject).to receive(:save_doc).with(:bib).twice
+        expect(File).to receive(:read).with("file.xml", encoding: "UTF-8").and_return("<registry></registry>")
+        expect(subject).to receive(:parse).with("<registry></registry>")
         subject.fetch
       end
 
       it "warn when error" do
-        expect(Net::HTTP).to receive(:get_response).and_raise(StandardError)
-        # expect(RelatonIana::Parser).to receive(:parse).and_raise(StandardError)
-        expect { subject.fetch }.to output(/Error/).to_stderr
+        expect(File).to receive(:read).with("file.xml", encoding: "UTF-8").and_raise(StandardError)
+        expect { subject.fetch }.to output(/Error: StandardError\. File: file\.xml/).to_stderr
       end
     end
 
-    it "use GITHUB_TOKEN" do
-      expect(ENV).to receive(:[]).with("GITHUB_TOKEN").and_return("1234").twice
-      allow(ENV).to receive(:[]).and_call_original
-      resp = double body: '{"items":[],"total_count":0}'
-      headers = { "Authorization" => "token 1234" }
-      expect(Faraday).to receive(:get).with(kind_of(String), kind_of(Hash), headers).and_return resp
-      subject.fetch
-    end
-
-    it "waite if rate limit is reached" do
-      resp = double "Response", body: '{"message":"API rate limit exceeded"}',
-                                headers: { "x-ratelimit-reset" => (Time.now + 30).to_i }
-      allow(Faraday).to receive(:get).and_return resp
-      expect(subject).to receive(:sleep).with(60).exactly(3).times
-      expect { subject.fetch }.to raise_error StandardError, "API rate limit exceeded"
+    it "parse" do
+      content = File.read "spec/fixtures/rpki.xml", encoding: "UTF-8"
+      expect(RelatonIana::Parser).to receive(:parse).with(Nokogiri::XML::Element).and_return :doc
+      expect(subject).to receive(:save_doc).with(:doc)
+      expect(RelatonIana::Parser).to receive(:parse).with(Nokogiri::XML::Element, :doc).and_return(:doc2).exactly(7).times
+      expect(subject).to receive(:save_doc).with(:doc2).exactly(7).times
+      subject.parse content
     end
 
     context "save doc" do

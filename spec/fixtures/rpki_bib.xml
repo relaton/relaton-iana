@@ -1,4 +1,4 @@
-<bibdata type="standard" schema-version="v1.2.1">
+<bibdata type="standard" schema-version="v1.2.3">
   <title format="text/plain">Resource Public Key Infrastructure (RPKI)</title>
   <uri type="src">http://www.iana.org/assignments/rpki</uri>
   <docidentifier type="IANA" primary="true">IANA rpki</docidentifier>

@@ -111,7 +111,7 @@ Done in: 155 sec.
 
 This method uses GitHub search API to fetch the documents. The search API has a https://docs.github.com/en/rest/reference/search#rate-limit[rate limitaion] of 30 requests per minute for authenticated users and 10 requests per minute for unauthenticated users. Usually, the rate limit is not reached because the search API is used only for the file list fetching. But if you run the method multiple times in a short period, the rate limit may be reached. In this case, the method will wait until the rate limit is reset.
 
-You can use a personal access token to increase the rate limit. To do this, add your personal access token to the `GITHUB_TOKEN` environment variable.
+You can use a personal access token (PTA) to increase the rate limit. To do this, add your PTA to the `GITHUB_TOKEN` environment variable.
 
 == Development
 
