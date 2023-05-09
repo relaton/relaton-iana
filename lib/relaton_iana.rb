@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "faraday"
-require "jing"
 require "relaton_bib"
 require_relative "relaton_iana/version"
 require_relative "relaton_iana/iana_bibliographic_item"
