@@ -13,6 +13,7 @@ module RelatonIana
       @format = format
       @ext = format.sub(/^bib/, "")
       @files = []
+      @index = Relaton::Index.find_or_create :IANA, file: "index-v1.yaml"
     end
 
     #
@@ -41,6 +42,7 @@ module RelatonIana
       rescue StandardError => e
         warn "Error: #{e.message}. File: #{file}"
       end
+      @index.save
     end
 
     def parse(content)
@@ -70,6 +72,7 @@ module RelatonIana
       else
         @files << file
       end
+      @index.add_or_update bib.docnumber, file
       File.write file, c, encoding: "UTF-8"
     end
 

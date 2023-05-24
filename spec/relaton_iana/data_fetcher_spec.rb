@@ -10,18 +10,21 @@ RSpec.describe RelatonIana::DataFetcher do
 
   context "instance" do
     subject { RelatonIana::DataFetcher.new("dir", "bibxml") }
+    let(:index) { subject.instance_variable_get(:@index) }
 
     it "initialize fetcher" do
       expect(subject.instance_variable_get(:@ext)).to eq "xml"
       expect(subject.instance_variable_get(:@files)).to eq []
       expect(subject.instance_variable_get(:@output)).to eq "dir"
       expect(subject.instance_variable_get(:@format)).to eq "bibxml"
+      expect(index).to be_instance_of Relaton::Index::Type
       expect(subject).to be_instance_of(RelatonIana::DataFetcher)
     end
 
     context "fetch data" do
       before do
         expect(Dir).to receive(:[]).with("iana-registries/**/*.xml").and_return ["file.xml"]
+        expect(index).to receive(:save)
       end
 
       it "successfully" do
@@ -57,6 +60,7 @@ RSpec.describe RelatonIana::DataFetcher do
         expect(File).to receive(:write)
           .with("dir/bib.xml", "<xml/>", encoding: "UTF-8")
         subject.save_doc bib
+        expect(index.index).to eq [{ id: "BIB", file: "dir/bib.xml" }]
       end
 
       it "xml" do
@@ -66,6 +70,7 @@ RSpec.describe RelatonIana::DataFetcher do
         expect(File).to receive(:write)
           .with("dir/bib.xml", "<xml/>", encoding: "UTF-8")
         subject.save_doc bib
+        expect(index.index).to eq [{ id: "BIB", file: "dir/bib.xml" }]
       end
 
       it "yaml" do
@@ -76,6 +81,7 @@ RSpec.describe RelatonIana::DataFetcher do
         expect(File).to receive(:write)
           .with("dir/bib.yaml", /id: 123/, encoding: "UTF-8")
         subject.save_doc bib
+        expect(index.index).to eq [{ id: "BIB", file: "dir/bib.yaml" }]
       end
 
       it "warn when file exists" do
@@ -86,6 +92,7 @@ RSpec.describe RelatonIana::DataFetcher do
           .with("dir/bib.xml", "<xml/>", encoding: "UTF-8")
         expect { subject.save_doc bib }
           .to output(/File dir\/bib.xml already exists/).to_stderr
+        expect(index.index).to eq [{ id: "BIB", file: "dir/bib.xml" }]
       end
     end
   end
