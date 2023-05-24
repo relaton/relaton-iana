@@ -3,13 +3,20 @@
 module RelatonIana
   # Methods for search IANA standards.
   module IanaBibliography
-    SOURCE = "https://raw.githubusercontent.com/relaton/relaton-data-iana/main/data/"
+    SOURCE = "https://raw.githubusercontent.com/relaton/relaton-data-iana/main/"
+    INDEX_FILE = "index-v1.yaml"
 
     # @param text [String]
     # @return [RelatonIana::IanaBibliographicItem]
     def search(text) # rubocop:disable Metrics/MethodLength
-      file = text.sub(/^IANA\s/, "").gsub(/[\s,:\/]/, "_").downcase
-      url = "#{SOURCE}#{file}.yaml"
+      # file = text.sub(/^IANA\s/, "").gsub(/[\s,:\/]/, "_").downcase
+      # url = "#{SOURCE}#{file}.yaml"
+      index = Relaton::Index.find_or_create :IANA, url: "#{SOURCE}index-v1.zip", file: INDEX_FILE
+      id = text.sub(/^IANA\s/, "")
+      row = index.search(id).min_by { |i| i[:id] }
+      return unless row
+
+      url = "#{SOURCE}#{row[:file]}"
       resp = Net::HTTP.get_response URI(url)
       return unless resp.code == "200"
 

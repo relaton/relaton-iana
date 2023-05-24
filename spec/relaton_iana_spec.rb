@@ -26,9 +26,7 @@ RSpec.describe RelatonIana do
   end
 
   it "not found document" do
-    VCR.use_cassette "not-found" do
-      bib = RelatonIana::IanaBibliography.get "IANA Link Relation Types"
-      expect(bib).to be_nil
-    end
+    bib = RelatonIana::IanaBibliography.get "IANA Link Relation Types"
+    expect(bib).to be_nil
   end
 end

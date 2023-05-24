@@ -1,7 +1,5 @@
 module RelatonIana
   class DataFetcher
-    SOURCE = "https://raw.githubusercontent.com/ietf-ribose/iana-registries/main/".freeze
-
     #
     # Data fetcher initializer
     #
