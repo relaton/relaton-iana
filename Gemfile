@@ -9,6 +9,7 @@ gem "rake", "~> 13.0"
 
 gem "rspec", "~> 3.0"
 
+gem "equivalent-xml", "~> 0.6"
 gem "rubocop", "~> 1.7"
 gem "rubocop-performance"
 gem "rubocop-rails"
