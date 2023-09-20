@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe RelatonIana do
+  before { RelatonIana.instance_variable_set :@configuration, nil }
+
   it "has a version number" do
     expect(RelatonIana::VERSION).not_to be nil
   end
@@ -26,7 +28,9 @@ RSpec.describe RelatonIana do
   end
 
   it "not found document" do
-    bib = RelatonIana::IanaBibliography.get "IANA Link Relation Types"
-    expect(bib).to be_nil
+    expect do
+      bib = RelatonIana::IanaBibliography.get "IANA Link Relation Types"
+      expect(bib).to be_nil
+    end.to output(/\[relaton-iana\] \(IANA Link Relation Types\) not found/).to_stderr
   end
 end

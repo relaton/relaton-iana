@@ -34,11 +34,14 @@ module RelatonIana
     # @param opts [Hash] options
     # @return [RelatonIana::IanaBibliographicItem]
     def get(ref, _year = nil, _opts = {})
-      warn "[relaton-iana] (\"#{ref}\") fetching..."
+      Util.warn "(#{ref}) fetching..."
       result = search(ref)
-      return unless result
+      unless result
+        Util.warn "(#{ref}) not found"
+        return
+      end
 
-      warn "[relaton-iana] (\"#{ref}\") found #{result.docidentifier[0].id}"
+      Util.warn "(#{ref}) found `#{result.docidentifier[0].id}`"
       result
     end
 
