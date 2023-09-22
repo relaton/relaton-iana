@@ -23,16 +23,27 @@ Or install it yourself as:
 
 == Usage
 
-=== Search for a standard using keywords
+=== Configuration
+
+Configuration is optional. The available option is `logger` which is a `Logger` instance. By default, the logger is `Logger.new($stderr)` with `Logger::WARN` level. To change the logger level, use `RelatonIana.configure` block.
 
 [source,ruby]
 ----
 require 'relaton_iana'
 => true
 
-item = RelatonIana::IanaBibliography.get "IANA service-names-port-numbers" 
-[relaton-iana] ("IANA service-names-port-numbers") fetching...
-[relaton-iana] ("IANA service-names-port-numbers") found IANA service-names-port-numbers
+RelatonIana.configure do |config|
+  config.logger.level = Logger::DEBUG
+end
+----
+
+=== Search for a standard using keywords
+
+[source,ruby]
+----
+item = RelatonIana::IanaBibliography.get "IANA service-names-port-numbers"
+[relaton-iana] (IANA service-names-port-numbers) fetching...
+[relaton-iana] (IANA service-names-port-numbers) found `IANA service-names-port-numbers`
 => #<RelatonIana::IanaBibliographicItem:0x00007f7c6cc024d0
 ...
 ----
