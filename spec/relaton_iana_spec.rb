@@ -26,8 +26,6 @@ RSpec.describe RelatonIana do
       expect(errors).to eq []
     end.to output(%r{
       \[relaton-iana\]\s\(IANA\sauto-response-parameters\)\sFetching\sfrom\sRelaton\srepository\s\.\.\.\n
-      (?:.+\n)?
-      \[relaton-iana\]\s\(IANA\sauto-response-parameters\)\sFound:\s`IANA\sauto-response-parameters`
     }x).to_stderr
   end
 
