@@ -42,8 +42,8 @@ end
 [source,ruby]
 ----
 item = RelatonIana::IanaBibliography.get "IANA service-names-port-numbers"
-[relaton-iana] (IANA service-names-port-numbers) fetching...
-[relaton-iana] (IANA service-names-port-numbers) found `IANA service-names-port-numbers`
+[relaton-iana] (IANA service-names-port-numbers) Fetching from Relaton repository ...
+[relaton-iana] (IANA service-names-port-numbers) Found: `IANA service-names-port-numbers`
 => #<RelatonIana::IanaBibliographicItem:0x00007f7c6cc024d0
 ...
 ----

@@ -13,8 +13,8 @@ RSpec.describe RelatonIana do
     expect(hash.size).to eq 32
   end
 
-  it "get document" do
-    VCR.use_cassette "auto-response-parameters" do
+  it "get document", vcr: "auto-response-parameters" do
+    expect do
       bib = RelatonIana::IanaBibliography.get "IANA auto-response-parameters"
       xml = bib.to_xml bibdata: true
       file = "spec/fixtures/auto-response-parameters.xml"
@@ -24,13 +24,16 @@ RSpec.describe RelatonIana do
       schema = Jing.new "grammars/relaton-iana-compile.rng"
       errors = schema.validate file
       expect(errors).to eq []
-    end
+    end.to output(%r{
+      \[relaton-iana\]\s\(IANA\sauto-response-parameters\)\sFetching\sfrom\sRelaton\srepository\s\.\.\.\n
+      \[relaton-iana\]\s\(IANA\sauto-response-parameters\)\sFound:\s`IANA\sauto-response-parameters`
+    }x).to_stderr
   end
 
   it "not found document" do
     expect do
       bib = RelatonIana::IanaBibliography.get "IANA Link Relation Types"
       expect(bib).to be_nil
-    end.to output(/\[relaton-iana\] \(IANA Link Relation Types\) not found/).to_stderr
+    end.to output(/\[relaton-iana\] \(IANA Link Relation Types\) Not found\./).to_stderr
   end
 end
