@@ -8,7 +8,7 @@ module RelatonIana
 
     # @param text [String]
     # @return [RelatonIana::IanaBibliographicItem]
-    def search(text) # rubocop:disable Metrics/MethodLength
+    def search(text) # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
       # file = text.sub(/^IANA\s/, "").gsub(/[\s,:\/]/, "_").downcase
       # url = "#{SOURCE}#{file}.yaml"
       index = Relaton::Index.find_or_create :IANA, url: "#{SOURCE}index-v1.zip", file: INDEX_FILE
