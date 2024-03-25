@@ -38,7 +38,7 @@ module RelatonIana
         content = File.read file, encoding: "UTF-8"
         parse(content) if content.include? "<registry"
       rescue StandardError => e
-        warn "Error: #{e.message}. File: #{file}"
+        Util.error "Error: #{e.message}. File: #{file}"
       end
       @index.save
     end
@@ -66,7 +66,7 @@ module RelatonIana
           end
       file = file_name(bib)
       if @files.include? file
-        warn "File #{file} already exists. Document: #{bib.docnumber}"
+        Util.warn "File #{file} already exists. Document: #{bib.docnumber}"
       else
         @files << file
       end

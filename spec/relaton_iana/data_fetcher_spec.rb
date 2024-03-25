@@ -35,7 +35,7 @@ RSpec.describe RelatonIana::DataFetcher do
 
       it "warn when error" do
         expect(File).to receive(:read).with("file.xml", encoding: "UTF-8").and_raise(StandardError)
-        expect { subject.fetch }.to output(/Error: StandardError\. File: file\.xml/).to_stderr
+        expect { subject.fetch }.to output(/Error: StandardError\. File: file\.xml/).to_stderr_from_any_process
       end
     end
 
@@ -91,7 +91,7 @@ RSpec.describe RelatonIana::DataFetcher do
         expect(File).to receive(:write)
           .with("dir/bib.xml", "<xml/>", encoding: "UTF-8")
         expect { subject.save_doc bib }
-          .to output(/File dir\/bib.xml already exists/).to_stderr
+          .to output(/File dir\/bib.xml already exists/).to_stderr_from_any_process
         expect(index.index).to eq [{ id: "BIB", file: "dir/bib.xml" }]
       end
     end

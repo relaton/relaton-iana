@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe RelatonIana do
-  before { RelatonIana.instance_variable_set :@configuration, nil }
-
   it "has a version number" do
     expect(RelatonIana::VERSION).not_to be nil
   end
@@ -24,15 +22,18 @@ RSpec.describe RelatonIana do
       schema = Jing.new "grammars/relaton-iana-compile.rng"
       errors = schema.validate file
       expect(errors).to eq []
-    end.to output(%r{
-      \[relaton-iana\]\s\(IANA\sauto-response-parameters\)\sFetching\sfrom\sRelaton\srepository\s\.\.\.\n
-    }x).to_stderr
+    end.to output(
+      include(
+        "[relaton-iana] INFO: (IANA auto-response-parameters) Fetching from Relaton repository ...",
+        "[relaton-iana] INFO: (IANA auto-response-parameters) Found: `IANA auto-response-parameters`",
+      ),
+    ).to_stderr_from_any_process
   end
 
   it "not found document" do
     expect do
       bib = RelatonIana::IanaBibliography.get "IANA Link Relation Types"
       expect(bib).to be_nil
-    end.to output(/\[relaton-iana\] \(IANA Link Relation Types\) Not found\./).to_stderr
+    end.to output(/\[relaton-iana\] INFO: \(IANA Link Relation Types\) Not found\./).to_stderr_from_any_process
   end
 end
