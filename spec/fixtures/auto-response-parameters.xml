@@ -1,6 +1,6 @@
-<bibdata type="standard" schema-version="v1.2.8">
+<bibdata type="standard" schema-version="v1.3.0">
   <fetched>2022-11-25</fetched>
-  <title format="text/plain">Automatic Responses to Electronic Mail Parameters</title>
+  <title>Automatic Responses to Electronic Mail Parameters</title>
   <uri type="src">http://www.iana.org/assignments/auto-response-parameters</uri>
   <docidentifier type="IANA" primary="true">IANA auto-response-parameters</docidentifier>
   <docnumber>auto-response-parameters</docnumber>

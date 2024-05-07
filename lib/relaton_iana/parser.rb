@@ -62,7 +62,7 @@ module RelatonIana
       if @rootdoc then @rootdoc.link
       else
         uri = URI.join @xml.namespace.href.sub(/(?<=[^\/])$/, "/"), @xml[:id]
-        [RelatonBib::TypedUri.new(type: "src", content: uri.to_s)]
+        [RelatonBib::Source.new(type: "src", content: uri.to_s)]
       end
     end
 
@@ -126,7 +126,7 @@ module RelatonIana
         name: "Internet Assigned Numbers Authority", abbreviation: "IANA",
       )
       role = { type: "publisher" }
-      [RelatonBib::ContributionInfo.new(entity: org, role: [role])]
+      [RelatonBib::Contributor.new(entity: org, role: [role])]
     end
   end
 end

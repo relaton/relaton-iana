@@ -9,7 +9,7 @@ describe RelatonIana::HashConverter do
 
   it "render YAML" do
     item = RelatonIana::XMLParser.from_xml File.read "spec/fixtures/auto-response-parameters.xml"
-    hash = item.to_hash
+    hash = item.to_h
     file = "spec/fixtures/auto-response-parameters.yaml"
     File.write file, hash.to_yaml, encoding: "UTF-8" unless File.exist? file
     expect(hash).to eq YAML.load_file file
