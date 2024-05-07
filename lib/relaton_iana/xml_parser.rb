@@ -1,5 +1,7 @@
 module RelatonIana
-  class XMLParser < RelatonBib::XMLParser
+  module XMLParser
+    include RelatonBib::Parser::XML
+    extend self
     # @param item_hash [Hash]
     # @return [RelatonIana::IanaBibliographicItem]
     def self.bib_item(item_hash)

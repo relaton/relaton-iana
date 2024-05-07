@@ -77,7 +77,7 @@ RSpec.describe RelatonIana::DataFetcher do
         subject.instance_variable_set(:@format, "yaml")
         subject.instance_variable_set(:@ext, "yaml")
         bib = double("bib", docnumber: "BIB")
-        expect(bib).to receive(:to_hash).and_return({ id: 123 })
+        expect(bib).to receive(:to_h).and_return({ id: 123 })
         expect(File).to receive(:write)
           .with("dir/bib.yaml", /id: 123/, encoding: "UTF-8")
         subject.save_doc bib

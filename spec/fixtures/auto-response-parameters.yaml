@@ -1,9 +1,8 @@
 ---
-schema-version: v1.2.8
+schema-version: v1.3.0
 id: IANAauto-response-parameters
 title:
 - content: Automatic Responses to Electronic Mail Parameters
-  format: text/plain
 link:
 - content: http://www.iana.org/assignments/auto-response-parameters
   type: src
