@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "faraday", "~> 2.7.0"
-  spec.add_dependency "relaton-bib", "~> 1.18.0"
+  spec.add_dependency "relaton-bib", "~> 1.19.0"
   spec.add_dependency "relaton-index", "~> 0.2.0"
 
   # Uncomment to register a new dependency of your gem
