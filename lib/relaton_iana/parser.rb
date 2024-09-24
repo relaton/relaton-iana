@@ -61,7 +61,7 @@ module RelatonIana
     def parse_link
       if @rootdoc then @rootdoc.link
       else
-        uri = URI.join @xml.namespace.href.sub(/(?<=[^\/])$/, "/"), @xml[:id]
+        uri = URI.join "https://www.iana.org/assignments/", @xml[:id]
         [RelatonBib::TypedUri.new(type: "src", content: uri.to_s)]
       end
     end
