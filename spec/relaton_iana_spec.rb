@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 RSpec.describe RelatonIana do
+  before do |example|
+    unless example.metadata[:skip_before]
+      # Force to download index file
+      allow_any_instance_of(Relaton::Index::Type).to receive(:actual?).and_return(false)
+      allow_any_instance_of(Relaton::Index::FileIO).to receive(:check_file).and_return(nil)
+    end
+  end
+
   it "has a version number" do
     expect(RelatonIana::VERSION).not_to be nil
   end
@@ -30,7 +38,7 @@ RSpec.describe RelatonIana do
     ).to_stderr_from_any_process
   end
 
-  it "not found document" do
+  it "not found document", skip_before: true do
     expect do
       bib = RelatonIana::IanaBibliography.get "IANA Link Relation Types"
       expect(bib).to be_nil
