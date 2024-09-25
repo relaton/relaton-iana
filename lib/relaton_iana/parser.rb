@@ -62,7 +62,7 @@ module RelatonIana
       if @rootdoc then @rootdoc.link
       else
         uri = URI.join "https://www.iana.org/assignments/", @xml[:id]
-        [RelatonBib::TypedUri.new(type: "src", content: uri.to_s)]
+        [RelatonBib::TypedUri.new(type: "self", content: uri.to_s)]
       end
     end
 
