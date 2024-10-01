@@ -5,8 +5,8 @@ title:
 - content: Automatic Responses to Electronic Mail Parameters
   format: text/plain
 link:
-- content: http://www.iana.org/assignments/auto-response-parameters
-  type: src
+- content: https://www.iana.org/assignments/auto-response-parameters
+  type: self
 type: standard
 docid:
 - id: IANA auto-response-parameters
