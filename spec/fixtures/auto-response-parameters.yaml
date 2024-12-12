@@ -31,5 +31,3 @@ language:
 script:
 - Latn
 fetched: '2022-11-25'
-ext:
-  schema-version: v1.0.0
