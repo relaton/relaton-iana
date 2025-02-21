@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require_relative "lib/relaton_iana/version"
+require_relative "lib/relaton/iana/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "relaton-iana"
-  spec.version       = RelatonIana::VERSION
+  spec.version       = Relaton::Iana::VERSION
   spec.authors       = ["Ribose Inc."]
   spec.email         = ["open.source@ribose.com"]
 
-  spec.summary       = "RelatonIana: Ruby XMLDOC impementation."
-  spec.description   = "RelatonIana: Ruby XMLDOC impementation."
+  spec.summary       = "Relaton::Iana: Ruby XMLDOC impementation."
+  spec.description   = "Relaton::Iana: Ruby XMLDOC impementation."
   spec.homepage      = "https://github.com/relaton/relaton-iana"
   spec.license       = "BSD-2-Clause"
   spec.required_ruby_version = ">= 2.7.0"
@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "faraday", "~> 2.7.0"
-  spec.add_dependency "relaton-bib", "~> 1.20.0"
+  spec.add_dependency "relaton-bib", "~> 2.0.0-alpha.1"
   spec.add_dependency "relaton-index", "~> 0.2.0"
 
   # Uncomment to register a new dependency of your gem
