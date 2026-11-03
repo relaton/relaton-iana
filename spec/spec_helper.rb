@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "rspec/matchers"
-require "equivalent-xml"
+require "canon/rspec_matchers"
 require "simplecov"
 require "jing"
 
